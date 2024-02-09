@@ -25,14 +25,14 @@ public class EmployeeRepository {
         employee.setName(rs.getString("name"));
         employee.setImage(rs.getString("image"));
         employee.setGender(rs.getString("gender"));
-        employee.setHireDate(rs.getDate("hireDate"));
+        employee.setHireDate(rs.getDate("hire_date"));
         employee.setMailAddress(rs.getString("mail_address"));
-        employee.setZipCode(rs.getString("zipCode"));
+        employee.setZipCode(rs.getString("zip_code"));
         employee.setAddress(rs.getString("address"));
         employee.setTelephone(rs.getString("telephone"));
         employee.setSalary(rs.getString("salary"));
         employee.setCharacteristics(rs.getString("characteristics"));
-        employee.setDependentsCount(rs.getInt("dependentsCount"));
+        employee.setDependentsCount(rs.getInt("dependents_count"));
         return employee;
     };
     
@@ -46,20 +46,22 @@ public class EmployeeRepository {
         String FIND_ALL_QUERY = """
         
         SELECT 
-            name
+            id
+            ,name
             ,image
             ,gender
             ,hire_date
             ,mail_address
             ,zip_code
             ,address
-            ,telephone,salary
+            ,telephone
+            ,salary
             ,characteristics
             ,dependents_count
         FROM 
             employees
         ORDER BY
-            id;
+            hire_date;
 
                 """;
 
@@ -87,7 +89,8 @@ public class EmployeeRepository {
         String LOAD_ID_QUERY = """
                 
         SELECT 
-            name
+            id
+            ,name
             ,image
             ,gender
             ,hire_date
@@ -122,6 +125,7 @@ public class EmployeeRepository {
             UPDATE 
                 employees 
             SET 
+
                 name=:name
                 ,image=:image
                 ,gender=:gender

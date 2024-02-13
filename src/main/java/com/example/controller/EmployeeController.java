@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 
 @Controller
 @RequestMapping("/employee")
@@ -40,13 +42,24 @@ public class EmployeeController {
 
     @GetMapping("/showDetail")
     public String showDetail(String id, Model model, UpdateEmployeeForm updateEmployeeForm) {
-        
-        // Employee employee = employeeService.showDetail(updateEmployeeForm.getIntId()); 
-        Employee employee = employeeService.showDetail(updateEmployeeForm.getIntId()); 
-        // Employee employee = employeeService.showDetail(updateEmployeeForm.getId()); 
+
+        // Employee employee =
+        // employeeService.showDetail(updateEmployeeForm.getIntId());
+        Employee employee = employeeService.showDetail(updateEmployeeForm.getIntId());
+        // Employee employee = employeeService.showDetail(updateEmployeeForm.getId());
         model.addAttribute("employee", employee);
 
         return "/employee/detail";
+    }
+
+    @PostMapping("/update")
+    public String update(UpdateEmployeeForm updateEmployeeForm) {
+
+        Employee employee = employeeService.showDetail(updateEmployeeForm.getIntId());
+        employee.setDependentsCount(updateEmployeeForm.getIntDependentsCount());
+        employeeService.update(employee);
+
+        return "redirect:/employee/showList";
     }
 
 }

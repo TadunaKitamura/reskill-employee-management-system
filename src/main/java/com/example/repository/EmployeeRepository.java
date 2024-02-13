@@ -103,10 +103,7 @@ public class EmployeeRepository {
         FROM 
             employees
 		WHERE
-			id = :id
-        ORDER BY
-            id;
-
+			id=:id
                 """;
         
 

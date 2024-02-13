@@ -100,4 +100,16 @@ public class InsertAdministratorController {
 
     }
 
+    /**
+     * ログアウト処理.
+     * @param loginForm
+     * @return
+     */
+    @GetMapping("/logout")
+    public String logout(LoginForm loginForm) {
+
+    session.invalidate();
+        return "redirect:/";
+    }
+
 }
